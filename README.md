@@ -1,2 +1,1 @@
-# 42-Paris_GNL
-Get Next Line
+# 42 - Get Next Line
