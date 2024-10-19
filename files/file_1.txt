@@ -1,3 +1,5 @@
-1onjour comment cda va !
-1Super et toi merci :) !
-1Il fait super beau aujodhui ET NON :()
+S1Lorem ipsum dolor sit amet,END 
+S2consectetur adipiscing elit,END 
+S3sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.END 
+S4Ut enim ad minim veniam,END 
+S5quis nostrud exercitation ullamco laborisEND
