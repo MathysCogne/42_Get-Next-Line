@@ -6,7 +6,7 @@
 /*   By: mcogne-- <mcogne--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 13:14:56 by mcogne--          #+#    #+#             */
-/*   Updated: 2024/10/19 17:40:59 by mcogne--         ###   ########.fr       */
+/*   Updated: 2024/10/19 18:12:53 by mcogne--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*ft_strjoin(char *s1, char *s2);
 char	*ft_substr(char *s, int start, int len);
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
+#  define BUFFER_SIZE 0
 # endif
 
 #endif
