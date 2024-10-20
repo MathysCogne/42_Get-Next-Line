@@ -6,7 +6,7 @@
 /*   By: mcogne-- <mcogne--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 13:13:42 by mcogne--          #+#    #+#             */
-/*   Updated: 2024/10/20 11:54:49 by mcogne--         ###   ########.fr       */
+/*   Updated: 2024/10/20 16:14:10 by mcogne--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,11 @@ int	get_next_line(int fd, char **line)
 		free(remaind);
 		remaind = NULL;
 		return (rep);
+	}
+	if (BUFFER_SIZE == 1)
+	{
+		free(remaind);
+		remaind = NULL;
 	}
 	return (rep);
 }

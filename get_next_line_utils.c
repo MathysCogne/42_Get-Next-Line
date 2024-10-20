@@ -6,7 +6,7 @@
 /*   By: mcogne-- <mcogne--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 13:14:35 by mcogne--          #+#    #+#             */
-/*   Updated: 2024/10/20 11:01:52 by mcogne--         ###   ########.fr       */
+/*   Updated: 2024/10/20 16:17:25 by mcogne--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,5 +119,7 @@ int	extract_line(int fd, char **line, char **remaind)
 		}
 		free(buffer);
 	}
+	if (**line)
+		return (1);
 	return (read_s);
 }
