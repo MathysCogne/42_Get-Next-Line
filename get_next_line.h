@@ -6,7 +6,7 @@
 /*   By: mcogne-- <mcogne--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 13:14:56 by mcogne--          #+#    #+#             */
-/*   Updated: 2024/10/20 10:50:48 by mcogne--         ###   ########.fr       */
+/*   Updated: 2024/10/20 16:57:38 by mcogne--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 
-int		get_next_line(int fd, char **line);
+char	*get_next_line(int fd);
 int		ft_read(int fd, char **buffer);
 int		find_end_line(char **line, char *buffer);
 
