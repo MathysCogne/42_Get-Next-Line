@@ -6,7 +6,7 @@
 /*   By: mcogne-- <mcogne--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 13:13:42 by mcogne--          #+#    #+#             */
-/*   Updated: 2024/10/19 17:44:18 by mcogne--         ###   ########.fr       */
+/*   Updated: 2024/10/20 11:54:49 by mcogne--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,14 @@
 int	ft_read(int fd, char **buffer)
 {
 	int	read_s;
+	int	i;
 
 	*buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!*buffer)
 		return (-1);
+	i = 0;
+	while (i < BUFFER_SIZE + 1)
+		(*buffer)[i++] = 0;
 	read_s = read(fd, *buffer, BUFFER_SIZE);
 	if (read_s < 0)
 	{
