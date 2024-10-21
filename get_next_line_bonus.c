@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcogne-- <mcogne--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 13:13:42 by mcogne--          #+#    #+#             */
-/*   Updated: 2024/10/21 20:34:18 by mcogne--         ###   ########.fr       */
+/*   Updated: 2024/10/21 20:56:13 by mcogne--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,18 +97,18 @@ int	assemble_line(int fd, char **line, char **remaind)
 
 char	*get_next_line(int fd)
 {
-	static char	*remaind;
+	static char	*remaind[1024];
 	char		*line;
 	int			rep;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || fd >= 1024)
 		return (NULL);
-	rep = assemble_line(fd, &line, &remaind);
+	rep = assemble_line(fd, &line, &remaind[fd]);
 	if (rep == -1 || rep == 0)
 	{
 		free(line);
-		free(remaind);
-		remaind = NULL;
+		free(remaind[fd]);
+		remaind[fd] = NULL;
 		return (NULL);
 	}
 	return (line);
