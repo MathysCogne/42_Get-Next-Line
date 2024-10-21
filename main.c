@@ -6,12 +6,11 @@
 /*   By: mcogne-- <mcogne--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 13:18:04 by mcogne--          #+#    #+#             */
-/*   Updated: 2024/10/21 19:38:48 by mcogne--         ###   ########.fr       */
+/*   Updated: 2024/10/21 20:27:31 by mcogne--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-/* MAIN - DEBUG */
 #include <fcntl.h>
 #include <unistd.h>
 
