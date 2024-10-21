@@ -6,7 +6,7 @@
 /*   By: mcogne-- <mcogne--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 13:14:35 by mcogne--          #+#    #+#             */
-/*   Updated: 2024/10/20 16:17:25 by mcogne--         ###   ########.fr       */
+/*   Updated: 2024/10/21 19:52:09 by mcogne--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,13 +106,12 @@ int	extract_line(int fd, char **line, char **remaind)
 	{
 		read_s = ft_read(fd, &buffer);
 		if (read_s == -1)
-		{
-			free(buffer);
 			return (-1);
-		}
 		pos = find_end_line(line, buffer);
 		if (pos > 0)
 		{
+			if (*remaind)
+				free(*remaind);
 			*remaind = ft_strdup(buffer + pos);
 			free(buffer);
 			return (1);

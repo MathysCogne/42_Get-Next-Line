@@ -6,7 +6,7 @@
 /*   By: mcogne-- <mcogne--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 13:18:04 by mcogne--          #+#    #+#             */
-/*   Updated: 2024/10/21 01:03:02 by mcogne--         ###   ########.fr       */
+/*   Updated: 2024/10/21 19:38:48 by mcogne--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,36 +17,27 @@
 
 int	main(int argc, char **argv)
 {
-	int			fd1, fd2 = 0;
-	char		*rep1;
+	int		fd1;
+	char	*rep1;
 
 	if (argc == 2)
 		fd1 = open(argv[1], O_RDONLY);
-
 	if (argc == 1)
 		fd1 = 0;
-
-	// else
-	// {
-	// 	fd1 = open("./files/file_1.txt", O_RDONLY);
-	// 	fd2 = open("./files/file_2.txt", O_RDONLY);
-	// }
-
-	if (fd1 == -1 || fd2 == -1)
+	if (fd1 == -1)
 	{
 		printf("Error opening files.\n");
 		return (1);
 	}
-	
 	rep1 = get_next_line(fd1);
 	while (rep1)
 	{
 		printf("File 1: %s", rep1);
+		free(rep1);
 		rep1 = get_next_line(fd1);
 	}
-
+	free(rep1);
 	if (fd1 != 0)
 		close(fd1);
-	close(fd2);
 	return (0);
 }

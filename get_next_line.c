@@ -6,7 +6,7 @@
 /*   By: mcogne-- <mcogne--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 13:13:42 by mcogne--          #+#    #+#             */
-/*   Updated: 2024/10/20 17:40:51 by mcogne--         ###   ########.fr       */
+/*   Updated: 2024/10/21 20:00:13 by mcogne--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,21 +39,18 @@ int	find_end_line(char **line, char *buffer)
 	char	*new_line;
 	char	*tmp_substr;
 
+	if (!buffer || buffer[0] == '\0')
+		return (0);
 	i = 0;
 	while (buffer[i] && buffer[i] != '\n')
 		i++;
-	tmp_substr = ft_substr(buffer, 0, i);
+	tmp_substr = ft_substr(buffer, 0, i + 1);
 	new_line = ft_strjoin(*line, tmp_substr);
-	free(*line);
 	free(tmp_substr);
+	free(*line);
 	*line = new_line;
 	if (buffer[i] == '\n')
-	{
-		new_line = ft_strjoin(*line, "\n");
-		free(*line);
-		*line = new_line;
 		return (i + 1);
-	}
 	return (0);
 }
 
@@ -104,20 +101,15 @@ char	*get_next_line(int fd)
 	char		*line;
 	int			rep;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || BUFFER_SIZE >= 1024)
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd >= 1024)
 		return (NULL);
 	rep = assemble_line(fd, &line, &remaind);
 	if (rep == -1 || rep == 0)
 	{
-		free(remaind);
 		free(line);
+		free(remaind);
 		remaind = NULL;
 		return (NULL);
-	}
-	if (BUFFER_SIZE == 1)
-	{
-		free(remaind);
-		remaind = NULL;
 	}
 	return (line);
 }
