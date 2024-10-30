@@ -7,7 +7,7 @@
 
 ## Description
 
-Get Next Line (GNL) is a project designed to read a line from a file descriptor, returning it one line at a time.
+Get Next Line (GNL) is a project to read a line from a file descriptor, returning it one line at a time.
 
 The primary goal is to create a function that efficiently reads and returns lines from a file or standard input without memory leaks.
 
@@ -34,7 +34,8 @@ int	main(void)
 	close(fd);
 	return (0);
 }
-```c
+
+```
 </br>
 
 ## Disclaimer
