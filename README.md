@@ -1,5 +1,6 @@
 <div align="center">
-<h1>42 - Get Next Line (GNL)</h1>
+<h1><img src="subject/banner.png" alt="42 Get Next Line (GNL)" width="700" /></h1>
+
 <p><strong>Because putnbr and putstr aren’t enough</strong></a></p>
 <p><a href="https://github.com/MathysCogne/42_Get-Next-Line/blob/main/subject/gnl.pdf"><strong>Subject</strong></a></p>
 </br>
