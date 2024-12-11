@@ -5,111 +5,67 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcogne-- <mcogne--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/18 13:13:42 by mcogne--          #+#    #+#             */
-/*   Updated: 2024/10/21 20:34:18 by mcogne--         ###   ########.fr       */
+/*   Created: 2024/12/11 19:08:00 by mcogne--          #+#    #+#             */
+/*   Updated: 2024/12/11 20:22:54 by mcogne--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	ft_read(int fd, char **buffer)
+char	*extract_line(char **stash)
 {
-	int	read_s;
-	int	i;
+	char	*line;
+	char	*newline_pos;
+	char	*tmp;
+	size_t	len;
 
-	*buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	if (!*buffer)
-		return (-1);
-	i = 0;
-	while (i < BUFFER_SIZE + 1)
-		(*buffer)[i++] = 0;
-	read_s = read(fd, *buffer, BUFFER_SIZE);
-	if (read_s < 0)
-	{
-		free(*buffer);
-		return (-1);
-	}
-	(*buffer)[read_s] = '\0';
-	return (read_s);
-}
+	len = 0;
+	if (!*stash || !**stash)
+		return (free(*stash), *stash = NULL, NULL);
 
-int	find_end_line(char **line, char *buffer)
-{
-	int		i;
-	char	*new_line;
-	char	*tmp_substr;
+	newline_pos = ft_strchr(*stash, '\n');
+	if (newline_pos)
+		len = newline_pos - *stash + 1;
+	else
+		len = ft_strlen(*stash);
 
-	if (!buffer || buffer[0] == '\0')
-		return (0);
-	i = 0;
-	while (buffer[i] && buffer[i] != '\n')
-		i++;
-	tmp_substr = ft_substr(buffer, 0, i + 1);
-	new_line = ft_strjoin(*line, tmp_substr);
-	free(tmp_substr);
-	free(*line);
-	*line = new_line;
-	if (buffer[i] == '\n')
-		return (i + 1);
-	return (0);
-}
+	line = malloc(sizeof(char) * (len + 1));
+	if (!line)
+		return (NULL);
+	line[len] = '\0';
+	while (len--)
+		line[len] = (*stash)[len];
 
-int	manage_remainder(char **remaind, char **line)
-{
-	int		pos;
-	char	*new_remaind;
+	if (newline_pos)
+		tmp = ft_strdup(newline_pos + 1);
+	else
+		tmp = NULL;
+	free(*stash);
+	*stash = tmp;
 
-	if (*remaind && **remaind != '\0')
-	{
-		pos = find_end_line(line, *remaind);
-		if (pos > 0)
-		{
-			new_remaind = ft_strdup(*remaind + pos);
-			free(*remaind);
-			*remaind = new_remaind;
-			return (1);
-		}
-		free(*remaind);
-		*remaind = NULL;
-	}
-	return (0);
-}
-
-int	assemble_line(int fd, char **line, char **remaind)
-{
-	char	*tmp_line;
-	int		read_s;
-
-	*line = ft_strdup("");
-	tmp_line = malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	if (!tmp_line)
-		return (-1);
-	tmp_line[0] = '\0';
-	if (manage_remainder(remaind, line))
-	{
-		free(tmp_line);
-		return (1);
-	}
-	read_s = extract_line(fd, line, remaind);
-	free(tmp_line);
-	return (read_s);
+	return (line);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*remaind;
-	char		*line;
-	int			rep;
+	static char *stash = NULL;
+	char buffer[BUFFER_SIZE + 1];
+	int bytes_read;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || fd >= 1024)
+	if (BUFFER_SIZE <= 0 || fd < 0 || fd >= 1024)
 		return (NULL);
-	rep = assemble_line(fd, &line, &remaind);
-	if (rep == -1 || rep == 0)
+
+	while (!ft_strchr(stash, '\n'))
 	{
-		free(line);
-		free(remaind);
-		remaind = NULL;
-		return (NULL);
+		bytes_read = read(fd, buffer, BUFFER_SIZE);
+		if (bytes_read < 0)
+			return (NULL);
+		if (bytes_read == 0)
+			break ;
+		buffer[bytes_read] = '\0';
+		stash = ft_strjoin(stash, buffer);
+		if (!stash)
+			return (NULL);
 	}
-	return (line);
+	return (extract_line(&stash));
 }
